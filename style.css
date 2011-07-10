@@ -1,0 +1,30 @@
+body
+{
+  font-size: 10pt;
+  color: black;
+  font-family: Courier;
+}
+
+#MainTable
+{
+  font-size: 10pt;
+  text-align: center;
+}
+
+#InfoTable
+{
+  font-size: 8pt;
+  text-align: left;
+}
+
+#Manage
+{
+  font-size: 8pt;
+  color: grey;
+}
+
+.Options
+{
+  font-size: 8pt;
+  color: grey;
+}
