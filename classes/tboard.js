@@ -11,6 +11,7 @@
  *     ласс, описывающий доску как единую сущность
  * PROPERTIES
  *    {Integer} Size ЧЧ размер доски
+ *    {Integer} StoneSize ЧЧ размер камн€, может быть 1 или 2
  * AGGREGATION
  *    {TGame}   Game    ЧЧ игра
  *    {TPlace}  Places  ЧЧ место на доске под один камень
@@ -35,9 +36,10 @@
  * AUTHOR
  *    Dolu mailto:dolu.bl@gmail.com
  *********/
-function TBoard(Size)
+function TBoard(Size, StoneSize)
 {
-    this.Size = Size;
+    this.Size      = Size;
+    this.StoneSize = StoneSize;
 
     this.Game = new TGame();
 
@@ -146,7 +148,8 @@ function TBoard(Size)
             // левый верхний угол
             this.Places[x][y] = new TPlace(
               "lt",
-              this.SGF_NtL(x) + this.SGF_NtL(y)
+              this.SGF_NtL(x) + this.SGF_NtL(y),
+              this.StoneSize
             );
           }
           else if (y === Size)
@@ -154,7 +157,8 @@ function TBoard(Size)
             // левый нижний угол
             this.Places[x][y] = new TPlace(
               "lb",
-              this.SGF_NtL(x) + this.SGF_NtL(y)
+              this.SGF_NtL(x) + this.SGF_NtL(y),
+              this.StoneSize
             );
           }
           else
@@ -162,7 +166,8 @@ function TBoard(Size)
             // лева€ сторона
             this.Places[x][y] = new TPlace(
               "l",
-              this.SGF_NtL(x) + this.SGF_NtL(y)
+              this.SGF_NtL(x) + this.SGF_NtL(y),
+              this.StoneSize
             );
           };
         }
@@ -173,7 +178,8 @@ function TBoard(Size)
             // правый верхний угол
             this.Places[x][y] = new TPlace(
               "rt",
-              this.SGF_NtL(x) + this.SGF_NtL(y)
+              this.SGF_NtL(x) + this.SGF_NtL(y),
+              this.StoneSize
             );
           }
           else if (y === Size)
@@ -181,7 +187,8 @@ function TBoard(Size)
             // правый нижний угол
             this.Places[x][y] = new TPlace(
               "rb",
-              this.SGF_NtL(x) + this.SGF_NtL(y)
+              this.SGF_NtL(x) + this.SGF_NtL(y),
+              this.StoneSize
             );
           }
           else
@@ -189,7 +196,8 @@ function TBoard(Size)
             // права€ сторона
             this.Places[x][y] = new TPlace(
               "r",
-              this.SGF_NtL(x) + this.SGF_NtL(y)
+              this.SGF_NtL(x) + this.SGF_NtL(y),
+              this.StoneSize
             );
           };
         }
@@ -200,7 +208,8 @@ function TBoard(Size)
             // верх доски
             this.Places[x][y] = new TPlace(
               "t",
-              this.SGF_NtL(x) + this.SGF_NtL(y)
+              this.SGF_NtL(x) + this.SGF_NtL(y),
+              this.StoneSize
             );
           }
           else if (y === Size)
@@ -208,7 +217,8 @@ function TBoard(Size)
             // низ доски
             this.Places[x][y] = new TPlace(
               "b",
-              this.SGF_NtL(x) + this.SGF_NtL(y)
+              this.SGF_NtL(x) + this.SGF_NtL(y),
+              this.StoneSize
             );
           }
           else
@@ -229,7 +239,8 @@ function TBoard(Size)
               {
                 this.Places[x][y] = new TPlace(
                   "d",
-                  this.SGF_NtL(x) + this.SGF_NtL(y)
+                  this.SGF_NtL(x) + this.SGF_NtL(y),
+                  this.StoneSize
                 );
               }
               // рисуем перекрестие
@@ -237,7 +248,8 @@ function TBoard(Size)
               {
                 this.Places[x][y] = new TPlace(
                   "c",
-                  this.SGF_NtL(x) + this.SGF_NtL(y)
+                  this.SGF_NtL(x) + this.SGF_NtL(y),
+                  this.StoneSize
                 );
               };
             }
@@ -257,7 +269,8 @@ function TBoard(Size)
               {
                 this.Places[x][y] = new TPlace(
                   "d",
-                  this.SGF_NtL(x) + this.SGF_NtL(y)
+                  this.SGF_NtL(x) + this.SGF_NtL(y),
+                  this.StoneSize
                 );
               }
               // рисуем перекрестие
@@ -265,7 +278,8 @@ function TBoard(Size)
               {
                 this.Places[x][y] = new TPlace(
                   "c",
-                  this.SGF_NtL(x) + this.SGF_NtL(y)
+                  this.SGF_NtL(x) + this.SGF_NtL(y),
+                  this.StoneSize
                 );
               };
             }
@@ -281,7 +295,8 @@ function TBoard(Size)
               {
                 this.Places[x][y] = new TPlace(
                   "d",
-                  this.SGF_NtL(x) + this.SGF_NtL(y)
+                  this.SGF_NtL(x) + this.SGF_NtL(y),
+                  this.StoneSize
                 );
               }
               // рисуем перекрестие
@@ -289,7 +304,8 @@ function TBoard(Size)
               {
                 this.Places[x][y] = new TPlace(
                   "c",
-                  this.SGF_NtL(x) + this.SGF_NtL(y)
+                  this.SGF_NtL(x) + this.SGF_NtL(y),
+                  this.StoneSize
                 );
               };
             }
@@ -298,7 +314,8 @@ function TBoard(Size)
             {
               this.Places[x][y] = new TPlace(
                 "c",
-                this.SGF_NtL(x) + this.SGF_NtL(y)
+                this.SGF_NtL(x) + this.SGF_NtL(y),
+                this.StoneSize
               );
             };
           };

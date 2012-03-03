@@ -44,6 +44,7 @@ function TEditor()
 {
     this.SGFParser = new TSGFParser();
     this.Board;
+    this.StoneSize = 1;
 
 
     /****m* SmallGoEditor/TEditor.DrawManager
@@ -67,6 +68,7 @@ function TEditor()
         <input type='button' value='>>' onclick='Editor.NextMove();'>\
         <input type='button' value='++>>' onclick='Editor.LastMove();'>\
         <input type='button' value='SGF' onclick='Editor.MakeSGF();'>\
+        <input type='button' value='Zoom' onclick='Editor.ChangeSize();'>\
         <input type='button' value='¬ыход' onclick='window.location.reload(true);'>\
         <div id='Variants'></div>\
         <hr color='gray'>\
@@ -100,6 +102,36 @@ function TEditor()
     /*********/
 
 
+    /****m* SmallGoEditor/TEditor.ChangeSize
+     * NAME
+     *    ChangeSize Ч 
+     * FUNCTION
+     *    Ётот метод 
+     * INPUTS
+     *    -
+     * RESULT
+     *    -
+     * SOURCE
+     */
+    // 
+    this.ChangeSize = function()
+    {
+      if (this.StoneSize === 1)
+      {
+        this.StoneSize = 2;
+        var size = this.Board.Size;
+        this.StartGame(size);
+      }
+      else if (this.StoneSize === 2)
+      {
+        this.StoneSize = 1;
+        var size = this.Board.Size;
+        this.StartGame(size);
+      };
+    };
+    /*********/
+
+
     /****m* SmallGoEditor/TEditor.StartGame
      * NAME
      *    StartGame Ч запускает создание доски и всЄ необходимое дл€ игры
@@ -115,7 +147,7 @@ function TEditor()
     this.StartGame = function(BoardSize)
     {
       // создаЄм доску заданного размера
-      this.Board = new TBoard(BoardSize);
+      this.Board = new TBoard(BoardSize, this.StoneSize);
       // загружаем данные об игре
       this.Board.Game.AN = this.SGFParser.Tree.Nodes[0].AN;
       this.Board.Game.BR = this.SGFParser.Tree.Nodes[0].BR;

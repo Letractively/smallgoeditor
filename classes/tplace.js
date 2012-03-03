@@ -31,15 +31,17 @@
  *    {Boolean} StoneLast ЧЧ камень был поставлен на доску последним
  *    {Boolean} Check  ЧЧ метка дл€ алгоритма закраски, используетс€ дл€
  *                        определени€ мЄртвых групп камней
+ *    {Integer} StoneSize ЧЧ размер камн€, может быть 1 или 2
  * METHODS
  *    {String} Show ЧЧ показать место
  * INPUTS
- *    {String} Type ЧЧ тип места
- *    {String} XY   ЧЧ координаты места
+ *    {String}  Type      ЧЧ тип места
+ *    {String}  XY        ЧЧ координаты места
+ *    {Integer} StoneSize ЧЧ размер камн€
  * AUTHOR
  *    Dolu mailto:dolu.bl@gmail.com
  *********/
-function TPlace(Type, XY)
+function TPlace(Type, XY, StoneSize)
 {
     this.Type      = Type;
     this.XY        = XY
@@ -47,6 +49,7 @@ function TPlace(Type, XY)
     this.StoneLast = false;
     this.Check     = false;
     this.Label     = "";
+    this.StoneSize = StoneSize;
 
     /****m* SmallGoEditor/TPlace.Show
      * NAME
@@ -64,6 +67,19 @@ function TPlace(Type, XY)
     this.Show = function()
     {
       var result = "";
+      var path   = "";
+      // ¬ыбор папки с картинками соответствующего размера
+      switch (this.StoneSize)
+      {
+        case 1:
+          path = "pics_s/";
+        break;
+        case 2:
+          path = "pics_l/";
+        break;
+        default :
+          path = "pics_s/";
+      };
       // если в этой €чейки нет метки
       if (this.Label === "")
       {
@@ -71,34 +87,34 @@ function TPlace(Type, XY)
         switch (this.Type)
         {
           case "lt":
-            result = "<td background='pics/lt.gif'>";
+            result += "<td background='" + path + "/lt.gif'>";
             break;
           case "t":
-            result = "<td background='pics/t.gif'>";
+            result += "<td background='" + path + "/t.gif'>";
             break;
           case "rt":
-            result = "<td background='pics/rt.gif'>";
+            result += "<td background='" + path + "/rt.gif'>";
             break;
           case "r":
-            result = "<td background='pics/r.gif'>";
+            result += "<td background='" + path + "/r.gif'>";
             break;
           case "rb":
-            result = "<td background='pics/rb.gif'>";
+            result += "<td background='" + path + "/rb.gif'>";
             break;
           case "b":
-            result = "<td background='pics/b.gif'>";
+            result += "<td background='" + path + "/b.gif'>";
             break;
           case "lb":
-            result = "<td background='pics/lb.gif'>";
+            result += "<td background='" + path + "/lb.gif'>";
             break;
           case "l":
-            result = "<td background='pics/l.gif'>";
+            result += "<td background='" + path + "/l.gif'>";
             break;
           case "d":
-            result = "<td background='pics/d.gif'>";
+            result += "<td background='" + path + "/d.gif'>";
             break;
           default:
-            result = "<td background='pics/c.gif'>";
+            result += "<td background='" + path + "/c.gif'>";
             break;
         };
         // подготовка данных о камне на этой €чейке
@@ -107,32 +123,32 @@ function TPlace(Type, XY)
           case "b":
             if (this.StoneLast) // если это был последний ход
             {
-              result += "<img src='pics/blacklast.gif'>";
+              result += "<img src='" + path + "/blacklast.gif'>";
             }
             else // простой чЄрный камень
             {
-              result += "<img src='pics/black.gif'>";
+              result += "<img src='" + path + "/black.gif'>";
             };
             break;
           case "w":
             if (this.StoneLast) // если это был последний ход
             {
-              result += "<img src='pics/whitelast.gif'>";
+              result += "<img src='" + path + "/whitelast.gif'>";
             }
             else // простой белый камень
             {
-              result += "<img src='pics/white.gif'>";
+              result += "<img src='" + path + "/white.gif'>";
             };
             break;
           default:
-            result += "<img src='pics/empty.gif' \
+            result += "<img src='" + path + "/empty.gif' \
                             onclick=\"Editor.MakeMove('" + this.XY +"');\">";
             break;
         };
       }
       else // если всЄ же в этой €чейке метка есть
       {
-        result =  "<td background='pics/empty.gif'>"; // на пустом месте
+        result =  "<td background='" + path + "/empty.gif'>"; // на пустом месте
         result += "<b>" + this.Label + "</b>"; // символ метки
       };
       return result + "</td>";
